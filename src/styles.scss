@@ -26,6 +26,9 @@ h6 {
   border-bottom-right-radius: 20px;
   background-color: white;
 }
+
+//base input
+
 .base-input {
   height: 40px;
   border-radius: 5px;
@@ -38,5 +41,30 @@ h6 {
     padding: 5px 35px 5px 20px;
     border: none;
     color: white;
+  }
+}
+
+//base btn
+.mbf-btn {
+  margin-right: 10px;
+  width: 120px;
+  &-active {
+    background-color: white;
+    color: #1894ff;
+    border: 1px solid #1894ff;
+  }
+  &-create {
+    background-color: white;
+    color: #00a050;
+    border: 1px solid #00a050;
+  }
+  &-save {
+    background-color: #1894ff;
+    color: white;
+  }
+  &-cancel {
+    background-color: #d6d6d6;
+    color: white;
+    border: 1px solid #707070;
   }
 }

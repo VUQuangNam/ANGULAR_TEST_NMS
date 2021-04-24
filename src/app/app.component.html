@@ -1,4 +1,9 @@
 <app-filter [(listFilter)]="listFilter" (callback)="handleCallback()">
 </app-filter>
-<app-table [(data)]="dataSub" [(listlable)]="listlable" (callback)="handleCallbackSettingTable($event)">
+<app-create *ngIf="isOpenAddAccount || isOpenEditAccount" [(data)]="listBaseCreate" [(arrayButton)]="arrayButton"
+    (callback)="handleCallbackEventBaseCreate($event)" [dataModel]="modelAcount">
+</app-create>
+<button *ngIf="!isOpenAddAccount && !isOpenEditAccount" class="btn btn-success" (click)="onChangeViewCreate()">create</button>
+<app-table *ngIf="!isOpenAddAccount && !isOpenEditAccount" [(data)]="dataSub" [(listlable)]="listlable"
+    (callback)="handleCallbackSettingTable($event)">
 </app-table>

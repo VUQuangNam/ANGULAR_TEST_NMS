@@ -1,8 +1,7 @@
-import {HttpBackend, HttpClient, HttpParams} from '@angular/common/http';
-import {Injectable} from '@angular/core';
-import {map, filter, catchError} from 'rxjs/operators';
-import {Observable} from 'rxjs';
-import {Account, ParamSearch} from '../model/account.model';
+import { HttpClient, HttpParams } from '@angular/common/http';
+import { Injectable } from '@angular/core';
+import { Observable } from 'rxjs';
+import { Account, ParamSearch } from '../model/account.model';
 
 @Injectable()
 export class AccountService {

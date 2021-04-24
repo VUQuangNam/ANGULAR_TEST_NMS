@@ -4,21 +4,21 @@
         <div class="filter-text">
             <div *ngFor="let item of listFilter" class="item-filter">
                 <div *ngIf="item.type === 'selected'">
-                    <span>{{ item.Text }}</span>
+                    <span>{{ item.text }}</span>
                     <select class="base-input" (change)="onChangeValueDate($event.target,item)">
                         <option *ngFor="let i of item.data"></option>
                     </select>
                 </div>
                 <div *ngIf="item.type === 'text'">
-                    <span>{{ item.Text }}</span>
+                    <span>{{ item.text }}</span>
                     <input type="text" class="base-input" (input)="onChangeValueDate($event.target,item)" />
                 </div>
                 <div class="input-filter" *ngIf="item.type === 'date'">
-                    <span>{{ item.Text }}</span>
+                    <span>{{ item.text }}</span>
                     <input type="date" class="base-input" (change)="onChangeValueDate($event.target,item)" />
                 </div>
                 <div *ngIf="item.type === 'select'">
-                    <span>{{ item.Text }}</span>
+                    <span>{{ item.text }}</span>
                     <br />
                     <select class="base-input" (change)="onChangeValueDate($event.target,item)">
                         <option value="">Tất cả</option>

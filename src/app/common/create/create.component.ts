@@ -23,8 +23,11 @@ export class CreateComponent implements OnInit {
         this.model = this.dataModel || {};
     }
 
-    onClickButton = (i) => {
-        this.callback.emit(this.model);
+    onClickButton = (i: any) => {
+        this.callback.emit({
+            data: this.model,
+            Type: i
+        });
     }
 }
 
