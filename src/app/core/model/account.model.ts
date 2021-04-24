@@ -218,13 +218,13 @@ export class AccountConfigModel {
         text: 'Họ',
         type: 'text',
         data: [],
-        condition: 'last_name'
+        condition: 'first_name'
       },
       {
         text: 'Tên',
         type: 'text',
         data: [],
-        condition: 'first_name'
+        condition: 'last_name'
       },
       {
         text: 'Địa chỉ',
