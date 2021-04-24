@@ -1,0 +1,33 @@
+<div class="form-create">
+    <div class="title">
+        {{option?.title}}
+    </div>
+    <div class="content row">
+        <div *ngFor="let item of data" [class]="item.class">
+            {{item?.label}}
+            <div *ngIf=" item.type ==='date' || item.type ==='text' || item.type ==='number' || item.type ==='file'">
+                <input [type]="item.type" [id]="item.id" [name]="item.name" [(ngModel)]="model[item.id]">
+            </div>
+            <div *ngIf="item.type ==='selected'">
+                <select [(ngModel)]="model[item.id]">
+                    <option *ngFor="let i of item.data" [value]="i.value">
+                        {{i.value || 1}}
+                    </option>
+                </select>
+            </div>
+            <div *ngIf="item.type ==='radio'">
+                <mat-radio-group [(ngModel)]="model[item.id]" aria-label="Select an option">
+                    <mat-radio-button value="1">Nam</mat-radio-button>
+                    <mat-radio-button value="2">Nữ</mat-radio-button>
+                </mat-radio-group>
+            </div>
+            <div *ngIf="item.type ==='checkbox'">
+                123
+            </div>
+        </div>
+    </div>
+    <div class="group-btn">
+        <button *ngFor="let i of arrayButton" class="btn mbf-btn" [class]="i.class"
+            (click)="onClickButton(i)">{{i?.text}}</button>
+    </div>
+</div>

@@ -1,0 +1,57 @@
+<div class="table-style shadow">
+    <div class="row">
+        <div class="col-5">
+            <div class="paginator">
+                <div class="current-page">
+                    <button (click)="backPage()">
+                        <img src="assets/svg/icon-left.svg" />
+                    </button>
+                    <span>{{ currentPage }}</span>
+                    <button (click)="nextPage()">
+                        <img src="assets/svg/icon-right.svg" />
+                    </button>
+                </div>
+                <span>/ {{ totalPage }}</span>
+            </div>
+        </div>
+        <div class="col-7 group-btn">
+            <button *ngFor="let i of listActive" class="btn" [class]="i.class" (click)="onClickBtnActive(i)">
+                {{ i?.text }}
+            </button>
+        </div>
+    </div>
+    <div class="scroll">
+        <table class="data-table">
+            <thead>
+                <tr>
+                    <th>STT </th>
+                    <th scope="col" *ngFor="let item of listlable" [style.min-width.px]="item.width">{{ item.name }}
+                    </th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let item of dataSub; let i = index">
+                    <td>
+                        {{ i+1 }}
+                    </td>
+                    <td *ngFor="let i of listlable">
+                        <span *ngIf="i.type === 'number'">{{ item[i.id] | number }}</span>
+                        <span *ngIf="i.type === 'string'">{{ item[i.id] }}</span>
+                        <span *ngIf="i.type === 'object'">{{ item[i.id][i.idSub] }}</span>
+                        <span *ngIf="i.type === 'date'">
+                            {{ item[i.id] | date: "dd-MM-YYYY" }}
+                        </span>
+                        <span *ngIf="i.type === 'setting'">
+                            <button (click)="onClickSetting(item, 'edit')" class="btn mbf-btn-active">
+                                Sửa
+                            </button>
+                            <button (click)="onClickSetting(item, 'delete')" class="btn mbf-btn-create ml-2">
+                                Xóa
+                            </button>
+                        </span>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>

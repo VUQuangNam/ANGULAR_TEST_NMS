@@ -1,0 +1,43 @@
+<div class="ci-base-filter shadow-half">
+    <div class="title">Bộ lọc</div>
+    <div class="listFilter">
+        <div class="filter-text">
+            <div *ngFor="let item of listFilter" class="item-filter">
+                <div *ngIf="item.type === 'selected'">
+                    <span>{{ item.Text }}</span>
+                    <select class="base-input" (change)="onChangeValueDate($event.target,item)">
+                        <option *ngFor="let i of item.data"></option>
+                    </select>
+                </div>
+                <div *ngIf="item.type === 'text'">
+                    <span>{{ item.Text }}</span>
+                    <input type="text" class="base-input" (input)="onChangeValueDate($event.target,item)" />
+                </div>
+                <div class="input-filter" *ngIf="item.type === 'date'">
+                    <span>{{ item.Text }}</span>
+                    <input type="date" class="base-input" (change)="onChangeValueDate($event.target,item)" />
+                </div>
+                <div *ngIf="item.type === 'select'">
+                    <span>{{ item.Text }}</span>
+                    <br />
+                    <select class="base-input" (change)="onChangeValueDate($event.target,item)">
+                        <option value="">Tất cả</option>
+                        <option *ngFor="let i of item.data" [value]="i.value">
+                            {{ i.name }}
+                        </option>
+                    </select>
+                </div>
+            </div>
+        </div>
+        <div class="search">
+            <div *ngFor="let item of listFilter" class="item-filter">
+                <div class="search-input" *ngIf="item.type === 'search'">
+                    <span>{{ item.Text }}</span>
+                    <input type="text" placeholder="Tìm kiếm..." class="base-input-search"
+                        (input)="onChangeValueDate($event.target,item)" />
+                    <img src="assets/svg/icon-search.svg">
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

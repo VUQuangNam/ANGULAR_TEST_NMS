@@ -1,0 +1,37 @@
+.table-style {
+    padding: 25px;
+    height: 100%;
+    .paginator {
+        display: flex;
+        align-items: center;
+        padding-bottom: 20px;
+        .current-page {
+            margin-right: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            width: 70px;
+            height: 40px;
+            border: 1px solid #d8d8d8;
+            border-radius: 5px;
+            button {
+                background: none;
+                outline: none;
+                border: none;
+                img {
+                    width: 10px;
+                }
+            }
+        }
+    }
+    .group-btn {
+        text-align: right;
+        button {
+            margin-left: 20px;
+        }
+    }
+}
+.scroll{
+    width: 100%;
+    overflow-x: auto;
+}

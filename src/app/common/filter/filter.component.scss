@@ -1,0 +1,40 @@
+.ci-base-filter {
+    padding: 20px;
+    .title {
+        margin-bottom: 10px;
+    }
+    .listFilter {
+        display: flex;
+        position: relative;
+        .search {
+            position: absolute;
+            right: 0;
+            ::placeholder {
+                color: white;
+            }
+            .search-input {
+                position: relative;
+                img {
+                    position: absolute;
+                    right: 10px;
+                    top: 12px;
+                }
+            }
+        }
+        .filter-text {
+            width: 85%;
+            display: grid;
+            grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr;
+        }
+        .item-filter {
+            margin-bottom: 20px;
+            margin-right: 15px;
+            select {
+                width: 100%;
+            }
+        }
+    }
+    input {
+        width: 100%;
+    }
+}
