@@ -3,7 +3,7 @@ import * as faker from 'faker';
 import { Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
 import { Accounts } from './core/data/account';
-import { Account, createAccount, createParamSearch, ParamSearch } from './core/model/account.model';
+import { Account, AccountConfigModel, createAccount, createParamSearch, ParamSearch } from './core/model/account.model';
 import { AccountService } from './core/services/account.service';
 import { SwalService } from './core/services/swal.service';
 
@@ -25,213 +25,9 @@ export class AppComponent implements OnInit {
     this.loadDataToLocal();
   }
   // strat config model 
-  listFilter: any = [
-    {
-      text: 'Họ',
-      type: 'text',
-      data: [],
-      condition: 'last_name'
-    },
-    {
-      text: 'Tên',
-      type: 'text',
-      data: [],
-      condition: 'first_name'
-    },
-    {
-      text: 'Địa chỉ',
-      type: 'text',
-      data: [],
-      condition: 'address'
-    },
-    {
-      text: 'Email',
-      type: 'text',
-      data: [],
-      condition: 'email'
-    },
-    {
-      text: 'Giới tính',
-      type: 'select',
-      data: [{
-        name: 'Male',
-        value: "M"
-      }, {
-        name: 'Female',
-        value: "F"
-      }],
-      condition: 'gender'
-    }]
-  listlable: any = [
-    {
-      id: '_id',
-      name: 'ID',
-      width: 200,
-      type: 'string'
-    },
-    {
-      id: 'account_number',
-      name: 'Số tài khoản',
-      width: 100,
-      type: 'string'
-    },
-    {
-      id: 'balance',
-      name: 'Số dư',
-      width: 200,
-      type: 'number'
-    },
-    {
-      id: 'age',
-      name: 'Tuổi',
-      width: 200,
-      type: 'number',
-    },
-    {
-      id: 'firstname',
-      name: 'Họ',
-      width: 200,
-      type: 'string',
-    },
-    {
-      id: 'lastname',
-      name: 'Tên',
-      width: 200,
-      type: 'string',
-    },
-    {
-      id: 'gender',
-      name: 'Giới tính',
-      width: 200,
-      type: 'string',
-    },
-    {
-      id: 'address',
-      name: 'Địa chỉ',
-      width: 200,
-      type: 'string',
-    },
-    {
-      id: 'employer',
-      name: 'Tên chủ thẻ',
-      width: 200,
-      type: 'string',
-    },
-    {
-      id: 'email',
-      name: 'Email',
-      width: 200,
-      type: 'string',
-    },
-    {
-      id: 'city',
-      name: 'Thành phố',
-      width: 200,
-      type: 'string',
-    },
-    {
-      id: 'state',
-      name: 'Quận',
-      width: 200,
-      type: 'string',
-    },
-    {
-      id: 'setting',
-      name: '',
-      width: 200,
-      type: 'setting',
-    }
-  ];
-  listBaseCreate: any = [
-    {
-      id: '_id',
-      label: 'ID',
-      name: '_id',
-      type: 'string',
-      class: 'col-6'
-    },
-    {
-      id: 'account_number',
-      label: 'Số tài khoản',
-      name: 'account_number',
-      type: 'string',
-      class: 'col-6'
-    },
-    {
-      id: 'balance',
-      label: 'Số dư',
-      name: 'balance',
-      type: 'number',
-      class: 'col-6'
-    },
-    {
-      id: 'age',
-      label: 'Tuổi',
-      name: 'age',
-      type: 'number',
-      class: 'col-6'
-    },
-    {
-      id: 'firstname',
-      label: 'Họ',
-      name: 'firstname',
-      type: 'string',
-      class: 'col-6'
-    },
-    {
-      id: 'lastname',
-      label: 'Tên',
-      name: 'lastname',
-      type: 'string',
-      class: 'col-6'
-    },
-    {
-      id: 'gender',
-      label: 'Giới tính',
-      name: 'gender',
-      type: 'selected',
-      class: 'col-6',
-      data: [
-        { value: 'F', Name: 'Female' },
-        { value: 'M', Name: 'Male' },
-      ]
-    },
-    {
-      id: 'address',
-      label: 'Địa chỉ',
-      name: 'address',
-      type: 'string',
-      class: 'col-6'
-    },
-    {
-      id: 'employer',
-      label: 'Tên chủ thẻ',
-      name: 'employer',
-      type: 'string',
-      class: 'col-6'
-    },
-    {
-      id: 'email',
-      label: 'Email',
-      name: 'email',
-      type: 'string',
-      class: 'col-6'
-    },
-    {
-      id: 'city',
-      label: 'Thành phố',
-      name: 'city',
-      type: 'string',
-      class: 'col-6'
-    },
-    {
-      id: 'state',
-      label: 'Quận',
-      name: 'state',
-      type: 'string',
-      class: 'col-6'
-    }
-  ]
+  listFilter: any = []
+  listlable: any = [];
+  listBaseCreate: any = []
   arrayButton: any = [{
     class: 'mbf-btn-cancel',
     text: 'Hủy bỏ'
@@ -245,8 +41,12 @@ export class AppComponent implements OnInit {
   modelAcount: any = {};
   isOpenAddAccount = false;
   isOpenEditAccount = false;
+  config = new AccountConfigModel;
 
   ngOnInit() {
+    this.listFilter = this.config.filter;
+    this.listlable = this.config.collums;
+    this.listBaseCreate = this.config.create;
     this.getAllAccount();
   }
 
