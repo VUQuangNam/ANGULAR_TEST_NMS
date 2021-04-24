@@ -1,9 +1,8 @@
-import { Component, OnInit, VERSION } from '@angular/core';
-import * as faker from 'faker';
+import { Component, OnInit } from '@angular/core';
 import { Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
 import { Accounts } from './core/data/account';
-import { Account, AccountConfigModel, createAccount, createParamSearch, ParamSearch } from './core/model/account.model';
+import { Account, AccountConfigModel, createParamSearch, ParamSearch } from './core/model/account.model';
 import { AccountService } from './core/services/account.service';
 import { SwalService } from './core/services/swal.service';
 
@@ -19,7 +18,7 @@ export class AppComponent implements OnInit {
 
   constructor(
     private accountService: AccountService,
-    private swal: SwalService
+    private swal: SwalService,
   ) {
     this.unSubscribeAll = new Subject<any>();
     this.loadDataToLocal();
@@ -42,6 +41,7 @@ export class AppComponent implements OnInit {
   isOpenAddAccount = false;
   isOpenEditAccount = false;
   config = new AccountConfigModel;
+  isLoading = false;
 
   ngOnInit() {
     this.listFilter = this.config.filter;
@@ -138,6 +138,7 @@ export class AppComponent implements OnInit {
   }
 
   getAllAccount = (param?: Partial<ParamSearch>) => {
+    this.isLoading = false;
     if (!param) param = {
       start: 0,
       limit: 25
@@ -145,11 +146,12 @@ export class AppComponent implements OnInit {
     this.accountService.getAccounts(createParamSearch(param))
       .pipe(takeUntil(this.unSubscribeAll))
       .subscribe((resp: Account[]) => {
-        console.log(resp);
         this.account = resp;
         this.dataSub = resp;
       }, (err: Error) => {
         this.account = [];
+      }, () => {
+        this.isLoading = true;
       });
   }
 }

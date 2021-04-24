@@ -20,7 +20,7 @@ import { fakeBackendProvider } from './core/services/fake-backend';
     FilterBaseModule,
     TableBaseModule,
     CreateBaseModule,
-    CommonModule
+    CommonModule,
   ],
   declarations: [AppComponent],
   bootstrap: [AppComponent],

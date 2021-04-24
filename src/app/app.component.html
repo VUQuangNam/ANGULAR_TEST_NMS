@@ -1,9 +1,15 @@
+<div class="c-loading" [class.c-loading--hidden]="isLoading">
+    <div class="c-loading__status spinner-border m-5" role="status">
+        <span class="sr-only">Loading...</span>
+    </div>
+</div>
 <app-filter [(listFilter)]="listFilter" (callback)="handleCallback()">
 </app-filter>
 <app-create *ngIf="isOpenAddAccount || isOpenEditAccount" [(data)]="listBaseCreate" [(arrayButton)]="arrayButton"
     (callback)="handleCallbackEventBaseCreate($event)" [dataModel]="modelAcount">
 </app-create>
-<button *ngIf="!isOpenAddAccount && !isOpenEditAccount" class="btn btn-success" (click)="onChangeViewCreate()">create</button>
+<button *ngIf="!isOpenAddAccount && !isOpenEditAccount" class="btn btn-success"
+    (click)="onChangeViewCreate()">create</button>
 <app-table *ngIf="!isOpenAddAccount && !isOpenEditAccount" [(data)]="dataSub" [(listlable)]="listlable"
     (callback)="handleCallbackSettingTable($event)">
 </app-table>
